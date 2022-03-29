@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
-
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import TextField from "@mui/material/TextField";
 export const ENDPOINT = "https://tc-todo-2022.herokuapp.com/todos";
 export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
   const [editing, setEditing] = useState(false);
@@ -23,7 +25,7 @@ export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
     );
   };
   return (
-    <>
+    <Card>
       <li className={todo.completed ? "completed" : "pending"}>
         {!editing ? (
           <span
@@ -45,7 +47,11 @@ export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
           </span>
         ) : (
           <>
-            <input type="text" defaultValue={todo.title} ref={titleInputRef} />
+            <TextField
+              type="text"
+              defaultValue={todo.title}
+              ref={titleInputRef}
+            />
 
             <textarea
               cols={50}
@@ -59,32 +65,38 @@ export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
 
       {!editing ? (
         <>
-          <button
+          <Button
+            variant="outlined"
             onClick={() => {
               setEditing((e) => true);
             }}
           >
-            edit
-          </button>
-          <button onClick={() => onTodoDeleted(todo)}>delete</button>
-          <button
+            Edit
+          </Button>
+          <Button variant="outlined" onClick={() => onTodoDeleted(todo)}>
+            delete
+          </Button>
+          <Button
+            variant="outlined"
             onClick={() => {
               onTodoUpdated({ ...todo, completed: !todo.completed });
             }}
           >
             {todo.completed ? "mark as uncompleted" : "mark as completed"}
-          </button>
+          </Button>
         </>
       ) : (
         <>
-          <button
+          <Button
+            variant="outlined"
             onClick={() => {
               setEditing((e) => false);
             }}
           >
             cancel
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="outlined"
             onClick={() => {
               onTodoUpdated({
                 ...todo,
@@ -95,9 +107,9 @@ export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
             }}
           >
             confirm edit
-          </button>
+          </Button>
         </>
       )}
-    </>
+    </Card>
   );
 }

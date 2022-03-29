@@ -1,3 +1,7 @@
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import { Check } from "@mui/icons-material";
 export function Filters({
   onSearch,
   searchInputRef,
@@ -13,16 +17,17 @@ export function Filters({
     <>
       <h2>Filter todos</h2>
       <form onSubmit={onSearch}>
-        <input
+        <TextField
           type="text"
-          ref={searchInputRef}
+          inputRef={searchInputRef}
           onChange={onSearch}
           placeholder="search todos"
         />
         {filters.searchquery !== "" && (
           <>
-            <button
+            <Button
               type="button"
+              variant="contained"
               onClick={() => {
                 searchInputRef.current.value = "";
                 onSearch();
@@ -30,7 +35,7 @@ export function Filters({
               title="clear search"
             >
               X
-            </button>
+            </Button>
             <label>
               <input
                 type="checkbox"
@@ -45,8 +50,7 @@ export function Filters({
           </>
         )}
         <label>
-          <input
-            type="checkbox"
+          <Checkbox
             defaultChecked={filters.seeUncompleted}
             value="only uncompleted todos"
             ref={seeUncompletedTodosCheckbox}
@@ -55,11 +59,10 @@ export function Filters({
           See uncompleted todos
         </label>
         <label>
-          <input
-            type="checkbox"
+          <Checkbox
             defaultChecked={filters.seeCompleted}
             value="only uncompleted todos"
-            ref={seeCompletedTodosCheckbox}
+            inputRef={seeCompletedTodosCheckbox}
             onChange={(e) => onSeeCompletedChanged(e)}
           />
           See completed todos
