@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/todo-list-redux-rest/static/css/main.fa1605b4.css",
-    "main.js": "/todo-list-redux-rest/static/js/main.889bb9ea.js",
+    "main.css": "/todo-list-redux-rest/static/css/main.215a966a.css",
+    "main.js": "/todo-list-redux-rest/static/js/main.e650ce5f.js",
     "static/media/roboto-all-500-normal.woff": "/todo-list-redux-rest/static/media/roboto-all-500-normal.52cb737b682eb9661ee1.woff",
     "static/media/roboto-all-700-normal.woff": "/todo-list-redux-rest/static/media/roboto-all-700-normal.ef6d1d09b20b877fee4e.woff",
     "static/media/roboto-all-400-normal.woff": "/todo-list-redux-rest/static/media/roboto-all-400-normal.376ea5d93f71583052f6.woff",
@@ -35,11 +35,11 @@
     "static/media/roboto-greek-ext-300-normal.woff2": "/todo-list-redux-rest/static/media/roboto-greek-ext-300-normal.04e05839d6a35e046c13.woff2",
     "static/media/roboto-greek-ext-700-normal.woff2": "/todo-list-redux-rest/static/media/roboto-greek-ext-700-normal.9674bc0ae12c2551d9d1.woff2",
     "index.html": "/todo-list-redux-rest/index.html",
-    "main.fa1605b4.css.map": "/todo-list-redux-rest/static/css/main.fa1605b4.css.map",
-    "main.889bb9ea.js.map": "/todo-list-redux-rest/static/js/main.889bb9ea.js.map"
+    "main.215a966a.css.map": "/todo-list-redux-rest/static/css/main.215a966a.css.map",
+    "main.e650ce5f.js.map": "/todo-list-redux-rest/static/js/main.e650ce5f.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa1605b4.css",
-    "static/js/main.889bb9ea.js"
+    "static/css/main.215a966a.css",
+    "static/js/main.e650ce5f.js"
   ]
 }
