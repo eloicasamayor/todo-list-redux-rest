@@ -1,7 +1,20 @@
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import ImageIcon from "@mui/icons-material/Image";
 import { useRef, useState } from "react";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import TextField from "@mui/material/TextField";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckIcon from "@mui/icons-material/Check";
+
 export const ENDPOINT = "https://tc-todo-2022.herokuapp.com/todos";
 export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
   const [editing, setEditing] = useState(false);
@@ -25,91 +38,101 @@ export function TodoItem({ todo, onTodoUpdated, onTodoDeleted, filters }) {
     );
   };
   return (
-    <Card>
-      <li className={todo.completed ? "completed" : "pending"}>
-        {!editing ? (
-          <span
-            onClick={() => {
-              onTodoUpdated({ ...todo, completed: !todo.completed });
-            }}
-          >
-            {filters.searchquery !== "" ? (
-              <>
-                {highlightText(todo.title)}
-                {highlightText(todo.details)}
-              </>
-            ) : (
-              <>
-                <p>{todo.title}</p>
-                <p>{todo.details}</p>
-              </>
-            )}
-          </span>
-        ) : (
-          <>
-            <TextField
-              type="text"
-              defaultValue={todo.title}
-              ref={titleInputRef}
-            />
+    <ListItem>
+      {!editing ? (
+        <ListItemText
+          className={todo.completed ? "completed" : "pending"}
+          primary={
+            filters.searchquery !== "" ? highlightText(todo.title) : todo.title
+          }
+          secondary={
+            filters.searchquery !== ""
+              ? highlightText(todo.details)
+              : todo.details
+          }
+          onClick={() => {
+            onTodoUpdated({ ...todo, completed: !todo.completed });
+          }}
+        />
+      ) : (
+        <ListItemText>
+          <TextField
+            label="todo title"
+            type="text"
+            variant="filled"
+            size="small"
+            defaultValue={todo.title}
+            inputRef={titleInputRef}
+          />
 
-            <textarea
-              cols={50}
-              rows={3}
-              defaultValue={todo.details}
-              ref={detailsInputRef}
-            />
-          </>
-        )}
-      </li>
+          <TextField
+            label="todo details"
+            type="text"
+            variant="filled"
+            size="small"
+            defaultValue={todo.details}
+            inputRef={detailsInputRef}
+          />
+        </ListItemText>
+      )}
 
       {!editing ? (
         <>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setEditing((e) => true);
-            }}
+          <Tooltip title="Edit">
+            <IconButton
+              onClick={() => {
+                setEditing((e) => true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton onClick={() => onTodoDeleted(todo)}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            title={todo.completed ? "Mark as uncompleted" : "Mark as completed"}
           >
-            Edit
-          </Button>
-          <Button variant="outlined" onClick={() => onTodoDeleted(todo)}>
-            delete
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              onTodoUpdated({ ...todo, completed: !todo.completed });
-            }}
-          >
-            {todo.completed ? "mark as uncompleted" : "mark as completed"}
-          </Button>
+            <IconButton
+              onClick={() => {
+                onTodoUpdated({ ...todo, completed: !todo.completed });
+              }}
+            >
+              {todo.completed ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+            </IconButton>
+          </Tooltip>
         </>
       ) : (
         <>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setEditing((e) => false);
-            }}
-          >
-            cancel
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              onTodoUpdated({
-                ...todo,
-                title: titleInputRef.current.value,
-                details: detailsInputRef.current.value,
-              });
-              setEditing((e) => false);
-            }}
-          >
-            confirm edit
-          </Button>
+          <Tooltip title="Cancel">
+            <IconButton
+              variant="outlined"
+              onClick={() => {
+                setEditing((e) => false);
+              }}
+            >
+              <CancelIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Confirm">
+            <IconButton
+              variant="outlined"
+              onClick={() => {
+                onTodoUpdated({
+                  ...todo,
+                  title: titleInputRef.current.value,
+                  details: detailsInputRef.current.value,
+                });
+                setEditing((e) => false);
+              }}
+            >
+              <CheckIcon />
+            </IconButton>
+          </Tooltip>
         </>
       )}
-    </Card>
+    </ListItem>
   );
 }

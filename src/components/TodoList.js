@@ -1,19 +1,20 @@
 import { TodoItem } from "./TodoItem";
+import List from "@mui/material/List";
 
 export function TodoList({ todos, onTodoUpdated, onTodoDeleted, filters }) {
   return (
     <>
       {filters.searchquery !== "" ? (
-        <h1>
+        <h2>
           Search results for "<mark>{filters.searchquery}</mark>"
-        </h1>
+        </h2>
       ) : (
         <>
-          <h1>All todos</h1>
+          <h2>All todos</h2>
         </>
       )}
       {filters.onlyUncompleted && <h2>(showing only uncompleted)</h2>}
-      <ul>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         {todos.map((todo, i) => (
           <TodoItem
             key={i}
@@ -23,7 +24,7 @@ export function TodoList({ todos, onTodoUpdated, onTodoDeleted, filters }) {
             filters={filters}
           />
         ))}
-      </ul>
+      </List>
     </>
   );
 }

@@ -1,3 +1,12 @@
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import { InputBase } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import Typography from "@mui/material/Typography";
+
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { TextField } from "@mui/material";
 import { useRef, useState } from "react";
 export function AfegirTodo({ onAddTodo }) {
   const [newTodoTitle, setNewTodoTitle] = useState("");
@@ -8,8 +17,10 @@ export function AfegirTodo({ onAddTodo }) {
   };
   return (
     <>
-      <h2>Add a todo</h2>
-      <form
+      {/* <h2>New todo</h2> */}
+      <Paper
+        style={{ padding: 10, marginTop: 20 }}
+        component="form"
         onSubmit={(e) => {
           e.preventDefault();
           const title = titleInputRef.current.value;
@@ -21,20 +32,21 @@ export function AfegirTodo({ onAddTodo }) {
           setNewTodoTitle((t) => "");
         }}
       >
-        <input
+        <h2 style={{ margin: "4px 0px" }}>Add new todo</h2>
+
+        <InputBase
           type="text"
           placeholder="New todo title"
-          ref={titleInputRef}
+          inputRef={titleInputRef}
           onChange={(e) => checkTodoTitle(e)}
-        ></input>
-        <textarea
-          cols={50}
-          rows={3}
-          defaultValue="new todo details"
-          ref={detailsInputRef}
-        />
-        {newTodoTitle !== "" && <input type="submit" value="add"></input>}
-      </form>
+        ></InputBase>
+        <InputBase placeholder="new todo details" inputRef={detailsInputRef} />
+        {newTodoTitle !== "" && (
+          <Button type="submit" variant="contained" value="add">
+            Add
+          </Button>
+        )}
+      </Paper>
     </>
   );
 }

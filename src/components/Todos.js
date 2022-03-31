@@ -54,6 +54,9 @@ export function Todos() {
   return (
     <div className="App">
       {/*  <button onClick={loadTodos}>Refresh</button> */}
+      <header>
+        <h1>Todo list</h1>
+      </header>
       <aside>
         <Filters
           filters={filters}
@@ -76,6 +79,9 @@ export function Todos() {
           filters={filters}
         />
       </main>
+      <footer>
+        <p>Això és el footer</p>
+      </footer>
     </div>
   );
 }

@@ -7,3 +7,38 @@ li span {
 body {
   background-color: #e7ebf0;
 }
+.MuiList-root.MuiList-padding.css-1mcnwpj-MuiList-root {
+  max-width: 100%;
+}
+main,
+aside {
+  width: 70%;
+  margin: auto;
+}
+h1 {
+  text-align: center;
+}
+body,
+#root,
+.App {
+  position: relative;
+  min-height: 100vh;
+}
+footer {
+  display: block;
+  width: 100%;
+  padding-top: 100px;
+  position: absolute;
+  bottom: 0;
+}
+label.filterCheckboxLabel {
+  padding: 5px 20px;
+}
+
+@media (max-width: 600px) {
+  main,
+  aside {
+    width: 98%;
+    margin: auto;
+  }
+}
