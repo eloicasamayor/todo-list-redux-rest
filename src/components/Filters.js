@@ -24,6 +24,7 @@ export function Filters({
 }) {
   return (
     <Paper
+      className="filters-form"
       onSubmit={onSearch}
       component="form"
       sx={{
@@ -33,78 +34,84 @@ export function Filters({
         width: "100%",
       }}
     >
-      <IconButton
-        sx={{ p: "10px" }}
-        aria-label="toggle password visibility"
-        onClick={() => {}}
-        onMouseDown={() => {}}
-        edge="end"
-      >
-        <SearchIcon />
-      </IconButton>
-      {/* <h2>Filter todos</h2> */}
+      <h2>Filter todos</h2>
+      <div className="filters-wrapper">
+        <div className="search-input-wrapper">
+          <IconButton
+            sx={{ p: "10px" }}
+            aria-label="toggle password visibility"
+            onClick={() => {}}
+            onMouseDown={() => {}}
+            edge="end"
+          >
+            <SearchIcon />
+          </IconButton>
 
-      {/* <form onSubmit={onSearch}> */}
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        fullWidth
-        type="text"
-        inputRef={searchInputRef}
-        onChange={onSearch}
-        placeholder="search todos"
-      ></InputBase>
+          {/* <form onSubmit={onSearch}> */}
+          <InputBase
+            fullWidth
+            sx={{ p: "10px" }}
+            type="text"
+            inputRef={searchInputRef}
+            onChange={onSearch}
+            placeholder="search todos"
+          ></InputBase>
+        </div>
 
-      {filters.searchquery !== "" && (
-        <>
-          <Tooltip title="clear search">
-            <IconButton
-              type="button"
-              variant="contained"
-              onClick={() => {
-                searchInputRef.current.value = "";
-                onSearch();
-              }}
-            >
-              <CancelIcon />
-            </IconButton>
+        {filters.searchquery !== "" && (
+          <>
+            <Tooltip title="clear search">
+              <IconButton
+                type="button"
+                variant="contained"
+                onClick={() => {
+                  searchInputRef.current.value = "";
+                  onSearch();
+                }}
+              >
+                <CancelIcon />
+              </IconButton>
+            </Tooltip>
+            <label>
+              <input
+                type="checkbox"
+                defaultChecked={filters.casesensitive}
+                value="aA"
+                title="case sensitive?"
+                ref={caseSensitiveCheckbox}
+                onChange={(e) => onCaseSensitiveChanged(e)}
+              />
+              aA
+            </label>
+          </>
+        )}
+        <div>
+          <Tooltip title="See uncompleted todos">
+            <label className="filterCheckboxLabel">
+              <Checkbox
+                defaultChecked={filters.seeUncompleted}
+                value="see uncompleted todos"
+                ref={seeUncompletedTodosCheckbox}
+                onChange={(e) => onSeeUncompletedChanged(e)}
+                color="default"
+              />
+              uncompleted
+            </label>
           </Tooltip>
-          <label>
-            <input
-              type="checkbox"
-              defaultChecked={filters.casesensitive}
-              value="aA"
-              title="case sensitive?"
-              ref={caseSensitiveCheckbox}
-              onChange={(e) => onCaseSensitiveChanged(e)}
-            />
-            aA
-          </label>
-        </>
-      )}
-      <Tooltip title="See uncompleted todos">
-        <label className="filterCheckboxLabel">
-          <Checkbox
-            defaultChecked={filters.seeUncompleted}
-            value="see uncompleted todos"
-            ref={seeUncompletedTodosCheckbox}
-            onChange={(e) => onSeeUncompletedChanged(e)}
-            color="default"
-          />
-          uncompleted
-        </label>
-      </Tooltip>
-      <Tooltip title="See completed todos">
-        <label className="filterCheckboxLabel">
-          <Checkbox
-            defaultChecked={filters.seeCompleted}
-            value="see completed todos"
-            inputRef={seeCompletedTodosCheckbox}
-            onChange={(e) => onSeeCompletedChanged(e)}
-            color="default"
-          />
-          completed
-        </label>
-      </Tooltip>
+          <Tooltip title="See completed todos">
+            <label className="filterCheckboxLabel">
+              <Checkbox
+                defaultChecked={filters.seeCompleted}
+                value="see completed todos"
+                inputRef={seeCompletedTodosCheckbox}
+                onChange={(e) => onSeeCompletedChanged(e)}
+                color="default"
+              />
+              completed
+            </label>
+          </Tooltip>
+        </div>
+      </div>
     </Paper>
   );
 }

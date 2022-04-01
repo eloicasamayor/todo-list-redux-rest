@@ -18,6 +18,9 @@ aside {
 h1 {
   text-align: center;
 }
+h2 {
+  margin: 0 10px;
+}
 body,
 #root,
 .App {
@@ -32,13 +35,28 @@ footer {
   bottom: 0;
 }
 label.filterCheckboxLabel {
-  padding: 5px 20px;
+  padding: 4px 8px;
 }
-
+.filters-form {
+  display: flex;
+  flex-direction: column;
+}
+.filters-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+.search-input-wrapper {
+  display: flex;
+  width: 100%;
+}
 @media (max-width: 600px) {
   main,
   aside {
     width: 98%;
     margin: auto;
+  }
+  .filters-form {
+    flex-direction: column;
   }
 }
