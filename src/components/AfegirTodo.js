@@ -19,7 +19,7 @@ export function AfegirTodo({ onAddTodo }) {
     <>
       {/* <h2>New todo</h2> */}
       <Paper
-        style={{ padding: "10px 0", marginTop: 20 }}
+        style={{ padding: "10px", marginTop: 20 }}
         component="form"
         onSubmit={(e) => {
           e.preventDefault();
@@ -32,7 +32,7 @@ export function AfegirTodo({ onAddTodo }) {
           setNewTodoTitle((t) => "");
         }}
       >
-        <h2>Add new todo</h2>
+        {/* <h2>Add new todo</h2> */}
         <IconButton>
           <AddCircleIcon sx={{ p: "4px" }} />
         </IconButton>

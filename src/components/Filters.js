@@ -5,12 +5,15 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Input from "@mui/material/Input";
 import CancelIcon from "@mui/icons-material/Cancel";
-
+import FormatSizeIcon from "@mui/icons-material/FormatSize";
+import FontDownloadSharpIcon from "@mui/icons-material/FontDownloadSharp";
+import FontDownloadOutlinedIcon from "@mui/icons-material/FontDownloadOutlined";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
-import { Check } from "@mui/icons-material";
+import { Check, FormatSize } from "@mui/icons-material";
 import { InputBase, Tooltip } from "@mui/material";
+import { fontSize } from "@mui/system";
 export function Filters({
   onSearch,
   searchInputRef,
@@ -34,58 +37,55 @@ export function Filters({
         width: "100%",
       }}
     >
-      <h2>Filter todos</h2>
+      {/* <h2>Filter todos</h2> */}
       <div className="filters-wrapper">
         <div className="search-input-wrapper">
-          <IconButton
-            sx={{ p: "10px" }}
-            aria-label="toggle password visibility"
-            onClick={() => {}}
-            onMouseDown={() => {}}
-            edge="end"
-          >
-            <SearchIcon />
-          </IconButton>
-
-          {/* <form onSubmit={onSearch}> */}
           <InputBase
             fullWidth
-            sx={{ p: "10px" }}
+            sx={{ p: "10px", fontSize: "1.5rem" }}
+            size="medium"
             type="text"
             inputRef={searchInputRef}
             onChange={onSearch}
-            placeholder="search todos"
-          ></InputBase>
+            placeholder={"search"}
+            className="searchInput"
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                searchInputRef.current.value = "";
+                onSearch();
+              }
+            }}
+          ></InputBase>{" "}
+          {filters.searchquery !== "" && (
+            <>
+              <Tooltip title="clear search">
+                <IconButton
+                  type="button"
+                  variant="contained"
+                  onClick={() => {
+                    searchInputRef.current.value = "";
+                    onSearch();
+                  }}
+                >
+                  <CancelIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="case sensitive">
+                <Checkbox
+                  defaultChecked={filters.casesensitive}
+                  value="aA"
+                  inputRef={seeUncompletedTodosCheckbox}
+                  onChange={(e) => onCaseSensitiveChanged(e)}
+                  color="default"
+                  icon={<FontDownloadOutlinedIcon />}
+                  checkedIcon={<FontDownloadSharpIcon />}
+                />
+              </Tooltip>
+            </>
+          )}
         </div>
 
-        {filters.searchquery !== "" && (
-          <>
-            <Tooltip title="clear search">
-              <IconButton
-                type="button"
-                variant="contained"
-                onClick={() => {
-                  searchInputRef.current.value = "";
-                  onSearch();
-                }}
-              >
-                <CancelIcon />
-              </IconButton>
-            </Tooltip>
-            <label>
-              <input
-                type="checkbox"
-                defaultChecked={filters.casesensitive}
-                value="aA"
-                title="case sensitive?"
-                ref={caseSensitiveCheckbox}
-                onChange={(e) => onCaseSensitiveChanged(e)}
-              />
-              aA
-            </label>
-          </>
-        )}
-        <div>
+        <div className="completed-checkoxes-wrapper">
           <Tooltip title="See uncompleted todos">
             <label className="filterCheckboxLabel">
               <Checkbox

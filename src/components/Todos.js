@@ -69,7 +69,7 @@ export function Todos() {
           seeCompletedCheckbox={seeCompletedCheckbox}
           onSeeCompletedChanged={onSeeCompletedChanged}
         />
-        <AfegirTodo onAddTodo={onAddTodo} />
+        {filters.searchquery === "" && <AfegirTodo onAddTodo={onAddTodo} />}
       </aside>
       <main>
         <TodoList
